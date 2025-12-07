@@ -1,0 +1,13 @@
+{
+  "name": "tall-receipt-ocr",
+  "private": true,
+  "devDependencies": {
+    "tailwindcss": "^3.4.10",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47"
+  },
+  "scripts": {
+    "build": "tailwindcss -i resources/css/app.css -o public/css/app.css --minify",
+    "dev": "tailwindcss -i resources/css/app.css -o public/css/app.css --watch"
+  }
+}
