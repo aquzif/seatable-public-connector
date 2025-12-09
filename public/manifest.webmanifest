@@ -1,0 +1,27 @@
+{
+  "name": "Seatable Public Connector",
+  "short_name": "SP Connector",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fdfdfc",
+  "theme_color": "#f97316",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}
