@@ -10,7 +10,8 @@ class PagePassword
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (config('app.page_password') === null) {
+        if (config('app.page_password1') === null
+        && config('app.page_password2') === null) {
             return $next($request);
         }
 

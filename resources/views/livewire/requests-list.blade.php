@@ -26,7 +26,9 @@
                     @if($request->images)
                         <div class="flex -space-x-2">
                             @foreach($request->images as $image)
-                                <img src="{{ Storage::disk('public')->url($image) }}" alt="Podgląd" class="h-16 w-16 object-cover rounded-lg border border-white shadow">
+                                <a href="{{ Storage::disk('public')->url($image) }}" target="_blank" rel="noopener noreferrer">
+                                    <img src="{{ Storage::disk('public')->url($image) }}" alt="Podgląd" class="h-16 w-16 object-cover rounded-lg border border-white shadow">
+                                </a>
                             @endforeach
                         </div>
                     @endif

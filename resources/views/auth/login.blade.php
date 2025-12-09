@@ -18,8 +18,11 @@
         <form method="POST" action="{{ route('authenticate') }}" class="space-y-4">
             @csrf
             <div class="space-y-2">
-                <label for="password" class="block text-sm font-medium text-slate-700">Hasło</label>
-                <input id="password" name="password" type="password" required autofocus class="w-full rounded-lg border-slate-200 focus:border-indigo-500 focus:ring-indigo-500" />
+                <label for="password1" class="block text-sm font-medium text-slate-700">Login</label>
+                <input id="password1" name="password1" type="text" required autofocus class="w-full rounded-lg border-slate-200 focus:border-indigo-500 focus:ring-indigo-500" />
+                <label for="password2" class="block text-sm font-medium text-slate-700">Hasło</label>
+                <input id="password2" name="password2" type="password" required autofocus class="w-full rounded-lg border-slate-200 focus:border-indigo-500 focus:ring-indigo-500" />
+
                 @error('password')
                     <p class="text-sm text-amber-600">{{ $message }}</p>
                 @enderror

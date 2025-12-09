@@ -16,18 +16,25 @@ class AuthController extends Controller
     public function authenticate(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
-            'password' => ['required', 'string'],
+            'password1' => ['required', 'string'],
+            'password2' => ['required', 'string'],
         ]);
 
-        $expectedPassword = config('app.page_password');
+        $expectedPassword1 = config('app.page_password1');
+        $expectedPassword2 = config('app.page_password2');
 
-        if ($expectedPassword && hash_equals($expectedPassword, $credentials['password'])) {
-            $request->session()->put('page_authenticated', true);
-
-            return redirect()->intended(route('home'));
+        if ($expectedPassword1 && !hash_equals($expectedPassword1, $credentials['password1'])) {
+            return back()->withErrors(['password' => 'Nieprawidłowe hasło dostępu.'])->withInput();
+        }
+        if ($expectedPassword2 && !hash_equals($expectedPassword2, $credentials['password2'])) {
+            return back()->withErrors(['password' => 'Nieprawidłowe hasło dostępu.'])->withInput();
         }
 
-        return back()->withErrors(['password' => 'Nieprawidłowe hasło dostępu.'])->withInput();
+        $request->session()->put('page_authenticated', true);
+
+        return redirect()->intended(route('home'));
+
+
     }
 
     public function logout(Request $request): RedirectResponse

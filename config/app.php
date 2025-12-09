@@ -99,7 +99,8 @@ return [
 
     'key' => env('APP_KEY'),
 
-    'page_password' => env('APP_PAGE_PASSWORD'),
+    'page_password1' => env('APP_PAGE_PASSWORD1'),
+    'page_password2' => env('APP_PAGE_PASSWORD2'),
 
     'previous_keys' => [
         ...array_filter(
