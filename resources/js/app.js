@@ -40,7 +40,64 @@ const registerServiceWorker = () => {
     });
 };
 
-document.addEventListener('DOMContentLoaded', () => {
+const getPreferredTheme = () => {
+    const storedTheme = localStorage.getItem('theme');
+
+    if (storedTheme === 'dark' || storedTheme === 'light') {
+        return storedTheme;
+    }
+
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+};
+
+const applyTheme = (theme) => {
+    const isDark = theme === 'dark';
+    document.documentElement.classList.toggle('dark', isDark);
+    document.documentElement.setAttribute('data-theme', theme);
+
+    const sunIcons = document.querySelectorAll('[data-theme-icon="sun"]');
+    const moonIcons = document.querySelectorAll('[data-theme-icon="moon"]');
+
+    sunIcons.forEach((icon) => icon.classList.toggle('hidden', isDark));
+    moonIcons.forEach((icon) => icon.classList.toggle('hidden', !isDark));
+
+    const toggle = document.getElementById('theme-toggle');
+    if (toggle) {
+        toggle.setAttribute('aria-pressed', isDark.toString());
+    }
+};
+
+const enableThemeSwitcher = () => {
+    const toggle = document.getElementById('theme-toggle');
+
+    const syncTheme = (theme) => {
+        localStorage.setItem('theme', theme);
+        applyTheme(theme);
+    };
+
+    const preferredTheme = getPreferredTheme();
+    applyTheme(preferredTheme);
+
+    if (toggle) {
+        toggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+            const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            syncTheme(nextTheme);
+        });
+    }
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+        const storedTheme = localStorage.getItem('theme');
+        if (!storedTheme) {
+            applyTheme(event.matches ? 'dark' : 'light');
+        }
+    });
+};
+
+const initialize = () => {
     enableOfflineBanner();
+    enableThemeSwitcher();
     registerServiceWorker();
-});
+};
+
+document.addEventListener('DOMContentLoaded', initialize);
