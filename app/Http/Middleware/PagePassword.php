@@ -14,7 +14,7 @@ class PagePassword
             return $next($request);
         }
 
-        if ($request->session()->boolean('page_authenticated')) {
+        if ($request->session()->get('page_authenticated',false)) {
             return $next($request);
         }
 

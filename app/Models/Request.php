@@ -14,6 +14,7 @@ class Request extends Model
         'kwota_brutto',
         'ocr_result',
         'images',
+        'status'
     ];
 
     protected $casts = [

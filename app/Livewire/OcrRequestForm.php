@@ -24,27 +24,22 @@ class OcrRequestForm extends Component
         $validated = $this->validate([
             'opis' => 'required|string|min:3',
             'kwota_brutto' => 'required|numeric|min:0.01',
-            'images' => 'required|array|max:5',
+            'images' => 'array|max:5',
             'images.*' => 'file|image|mimes:jpg,jpeg,png,webp|max:10240',
         ]);
 
         $storedImages = collect($this->images)->map(fn ($image) => $image->store('receipts', 'public'))->all();
 
-        $ocrResult = $ocrService->analyze(
-            $storedImages,
-            $validated['opis'],
-            $validated['kwota_brutto'],
-        );
-
         RequestModel::create([
             'opis' => $validated['opis'],
             'kwota_brutto' => $validated['kwota_brutto'],
-            'ocr_result' => $ocrResult,
+            'ocr_result' => '',
             'images' => $storedImages,
+            'status' => empty($storedImages) ? 'ready':'pending',
         ]);
 
         $this->reset(['opis', 'kwota_brutto', 'images']);
-        $this->statusMessage = 'Zapisano i przesłano do OCR.';
+        $this->statusMessage = 'Zapisano i przesłano do importu.';
     }
 
     public function render()

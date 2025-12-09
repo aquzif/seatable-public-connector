@@ -13,3 +13,8 @@ Route::middleware('page.password')->group(function () {
     Route::get('/requests', RequestsList::class)->name('requests.index');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
+
+Route::prefix('/api')->middleware('authorisation')->group(function () {
+    Route::get('/requests', [\App\Http\Controllers\APIController::class, 'getRequestsToImport']);
+    Route::get('/requests/{request:id}/imported', [\App\Http\Controllers\APIController::class, 'markRequestAsImported']);
+});
