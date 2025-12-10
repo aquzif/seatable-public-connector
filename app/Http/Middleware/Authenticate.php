@@ -10,7 +10,7 @@ class Authenticate
     {
         $token = $request->bearerToken() ?? $request->query('token');
 
-        if ($token !== env('APP_PAGE_PASSWORD')) {
+        if ($token !== env('APP_PAGE_PASSWORD1').env('APP_PAGE_PASSWORD2')) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
