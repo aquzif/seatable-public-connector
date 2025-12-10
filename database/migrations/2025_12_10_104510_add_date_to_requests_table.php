@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::table('requests', function (Blueprint $table) {
             $table->date('data')
-                ->default('now()')
+                ->default('19000101')
                 ->after('kwota_brutto');
         });
     }

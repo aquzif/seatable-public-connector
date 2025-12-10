@@ -1,6 +1,12 @@
 @php
     use Illuminate\Support\Facades\Storage;
     use Illuminate\Support\Str;
+
+    $statusClasses = [
+        'pending' => 'bg-amber-50 text-amber-700 ring-amber-100 dark:bg-amber-950/40 dark:text-amber-200 dark:ring-amber-900/50',
+        'ready' => 'bg-sky-50 text-sky-700 ring-sky-100 dark:bg-sky-950/40 dark:text-sky-200 dark:ring-sky-900/50',
+        'imported' => 'bg-emerald-50 text-emerald-700 ring-emerald-100 dark:bg-emerald-950/40 dark:text-emerald-200 dark:ring-emerald-900/50',
+    ];
 @endphp
 
 <div class="space-y-8">
@@ -28,6 +34,16 @@
                         <p class="text-lg font-semibold text-slate-900 dark:text-white">{{ $request->opis }}</p>
                         <div class="flex flex-wrap items-center gap-3 text-sm text-slate-600 dark:text-slate-300">
                             <span class="inline-flex items-center gap-2 rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700 ring-1 ring-indigo-100 dark:bg-indigo-950/50 dark:text-indigo-200 dark:ring-indigo-900/60">Kwota brutto: <span class="font-bold">{{ $request->kwota_brutto }}</span></span>
+                            @php
+                                $statusClass = $statusClasses[$request->status] ?? 'bg-slate-100 text-slate-700 ring-slate-200 dark:bg-slate-700/80 dark:text-slate-100 dark:ring-slate-600';
+                                $statusLabel = match ($request->status) {
+                                    'pending' => 'W trakcie',
+                                    'ready' => 'Gotowe',
+                                    'imported' => 'Zaimportowane',
+                                    default => ucfirst($request->status ?? 'Nieznany'),
+                                };
+                            @endphp
+                            <span class="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold ring-1 {{ $statusClass }}">Status: <span class="font-bold">{{ $statusLabel }}</span></span>
                             <span class="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-100 dark:bg-emerald-950/40 dark:text-emerald-200 dark:ring-emerald-900/50">Data: <span class="font-bold">{{ optional($request->data)->format('d.m.Y') }}</span></span>
                             <span class="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700 ring-1 ring-slate-200 dark:bg-slate-700/80 dark:text-slate-100 dark:ring-slate-600">Dodano {{ $request->created_at->format('d.m.Y H:i') }}</span>
                         </div>
