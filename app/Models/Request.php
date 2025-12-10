@@ -12,13 +12,15 @@ class Request extends Model
     protected $fillable = [
         'opis',
         'kwota_brutto',
+        'data',
         'ocr_result',
         'images',
-        'status'
+        'status',
     ];
 
     protected $casts = [
         'kwota_brutto' => 'decimal:2',
         'images' => 'array',
+        'data' => 'date:Y-m-d',
     ];
 }

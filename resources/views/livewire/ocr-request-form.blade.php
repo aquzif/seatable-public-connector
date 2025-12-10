@@ -22,7 +22,7 @@
         <div class="grid gap-4 md:grid-cols-2">
             <div class="space-y-3">
                 <label class="block text-sm font-semibold text-slate-800 dark:text-slate-100" for="opis">Opis</label>
-                <textarea wire:model.defer="opis" id="opis" rows="4" class="w-full rounded-2xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-indigo-400 dark:focus:ring-indigo-500/50" placeholder="Krótki opis zgłoszenia"></textarea>
+                <textarea wire:model.defer="opis" style="height: 113px" id="opis" rows="4" class="w-full rounded-2xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-indigo-400 dark:focus:ring-indigo-500/50" placeholder="Krótki opis zgłoszenia"></textarea>
                 @error('opis') <p class="text-sm font-medium text-amber-600 dark:text-amber-300">{{ $message }}</p> @enderror
             </div>
 
@@ -30,6 +30,9 @@
                 <label class="block text-sm font-semibold text-slate-800 dark:text-slate-100" for="kwota_brutto">Kwota brutto</label>
                 <input wire:model.defer="kwota_brutto" id="kwota_brutto" type="number" step="0.01" min="0" inputmode="decimal" class="w-full rounded-2xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-indigo-400 dark:focus:ring-indigo-500/50" placeholder="0.00">
                 @error('kwota_brutto') <p class="text-sm font-medium text-amber-600 dark:text-amber-300">{{ $message }}</p> @enderror
+                <label class="block text-sm font-semibold text-slate-800 dark:text-slate-100" for="data">Data</label>
+                <input wire:model.defer="data" id="data" type="date" class="w-full rounded-2xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-indigo-400 dark:focus:ring-indigo-500/50">
+                @error('data') <p class="text-sm font-medium text-amber-600 dark:text-amber-300">{{ $message }}</p> @enderror
             </div>
         </div>
 
